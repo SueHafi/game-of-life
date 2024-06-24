@@ -1,0 +1,14 @@
+
+.title {
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+}
+
+.rainbow-effect {
+  display: inline-block;
+  background: linear-gradient(to right, #0dcfbe 0%, #8014cf 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
