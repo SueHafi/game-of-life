@@ -19,18 +19,32 @@ function App() {
   const [board, setBoard] = useState(generateGrid(10));
   console.log(board);
 
+  function handleCellClick(rowIndex: number, cellIndex: number) {
+    const copyBoard = structuredClone(board);
+    copyBoard[rowIndex][cellIndex] = !board[rowIndex][cellIndex];
+    setBoard(copyBoard);
+  }
+
   return (
     <>
       <Header />
       <table className="table">
-        {board.map((row, i) => (
-          <tr key={i}>
-            {row.map((cell, i) => (
-              <td key={i}>{cell ? "O" : "X"}</td>
+        {board.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {row.map((cell, cellIndex) => (
+              <td key={cellIndex}>
+                <button
+                  className="button"
+                  onClick={() => handleCellClick(rowIndex, cellIndex)}
+                >
+                  {cell ? "O" : "X"}
+                </button>
+              </td>
             ))}
           </tr>
         ))}
       </table>
+      <button>Next</button>
     </>
   );
 }
