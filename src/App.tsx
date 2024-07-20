@@ -3,7 +3,7 @@ import Header from "./components/Header.tsx";
 import "./App.css";
 import { getNextGen } from "./utils.ts";
 
-function generateGrid(gridSize: number): boolean[][] {
+function generateBoard(gridSize: number): boolean[][] {
   const grid = [];
   for (let i = 0; i < gridSize; i++) {
     const row = [];
@@ -17,7 +17,7 @@ function generateGrid(gridSize: number): boolean[][] {
 }
 
 function App() {
-  const [board, setBoard] = useState(generateGrid(10));
+  const [board, setBoard] = useState(generateBoard(10));
   const [genCount, setGenCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -52,8 +52,15 @@ function App() {
   function handleStartButtonClick(): void {
     setIsRunning(true);
   }
+
   function handlePauseButtonClick(): void {
     setIsRunning(false);
+  }
+
+  function handleClearButtonClick(): void {
+    setIsRunning(false);
+    setBoard(generateBoard(10));
+    setGenCount(0);
   }
 
   return (
@@ -82,6 +89,7 @@ function App() {
         <button onClick={handleStartButtonClick}>Start</button>
       )}
       <button onClick={handleNextButtonClick}>Next</button>
+      <button onClick={handleClearButtonClick}>Clear</button>
     </>
   );
 }
