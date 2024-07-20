@@ -24,4 +24,15 @@ describe("getNextGen", () => {
       [true, true],
     ]);
   });
+  test("should stay alive when cell is alive and has 3 neighbours", () => {
+    const board = [
+      [true, true],
+      [true, true],
+    ];
+    const result = getNextGen(board);
+    expect(result).toEqual([
+      [true, true],
+      [true, true],
+    ]);
+  });
 });
