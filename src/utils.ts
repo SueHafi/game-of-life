@@ -12,13 +12,18 @@ export function getNextGen(board: boolean[][]): boolean[][] {
     const row = board[rowIndex];
     for (let colIndex = 0; colIndex < row.length; colIndex++) {
       const neighbourCount = countNeighbours(
+        board,
         rowIndex,
         rowCount,
         colIndex,
-        colCount,
-        board
+        colCount
       );
-      if (board[rowIndex][colIndex] && neighbourCount === 3) {
+
+      const isAlive = board[rowIndex][colIndex];
+
+      if ((isAlive && neighbourCount === 2) || neighbourCount === 3) {
+        clonedBoard[rowIndex][colIndex] = true;
+      } else if (!isAlive && neighbourCount === 3) {
         clonedBoard[rowIndex][colIndex] = true;
       } else {
         clonedBoard[rowIndex][colIndex] = false;
@@ -29,11 +34,11 @@ export function getNextGen(board: boolean[][]): boolean[][] {
 }
 
 function countNeighbours(
+  board: boolean[][],
   rowIndex: number,
   rowCount: number,
   colIndex: number,
-  colCount: number,
-  board: boolean[][]
+  colCount: number
 ) {
   let neighbourCount = 0;
 

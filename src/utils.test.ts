@@ -13,10 +13,35 @@ describe("getNextGen", () => {
   test("should return a single dead cell when called with single alive cell", () => {
     expect(getNextGen([[true]])).toEqual([[false]]);
   });
-  test("should stay alive when cell is alive and has 3 neighbours", () => {
+
+  test("should come to life when cell is dead and has 3 neighbours", () => {
+    const board = [
+      [true, true, true],
+      [false, false, false],
+    ];
+    const result = getNextGen(board);
+    expect(result).toEqual([
+      [false, true, false],
+      [false, true, false],
+    ]);
+  });
+
+  test("should die when cell is alive and has 4 neighbours", () => {
+    const board = [
+      [true, true, true],
+      [true, true, false],
+    ];
+    const result = getNextGen(board);
+    expect(result).toEqual([
+      [true, false, true],
+      [true, false, true],
+    ]);
+  });
+
+  test("should stay alive when cell is alive and has 2 neighbours", () => {
     const board = [
       [true, true],
-      [true, true],
+      [true, false],
     ];
     const result = getNextGen(board);
     expect(result).toEqual([
@@ -24,6 +49,7 @@ describe("getNextGen", () => {
       [true, true],
     ]);
   });
+
   test("should stay alive when cell is alive and has 3 neighbours", () => {
     const board = [
       [true, true],
