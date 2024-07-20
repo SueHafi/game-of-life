@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header.tsx";
 import "./App.css";
-import { getNextGen } from "./utils.ts";
+import {
+  Board,
+  applyKickbackPattern,
+  getNextGen,
+  generateBoard,
+} from "./board.ts";
+import { boardSize } from "./config.ts";
 
-function generateBoard(gridSize: number): boolean[][] {
-  const grid = [];
-  for (let i = 0; i < gridSize; i++) {
-    const row = [];
-    for (let j = 0; j < gridSize; j++) {
-      const cell = false;
-      row.push(cell);
-    }
-    grid.push(row);
-  }
-  return grid;
+function generateNewBoard(): Board {
+  const board = generateBoard(boardSize);
+  const boardWithPattern = applyKickbackPattern(board);
+  return boardWithPattern;
 }
 
 function App() {
-  const [board, setBoard] = useState(generateBoard(10));
+  const [board, setBoard] = useState(generateNewBoard());
   const [genCount, setGenCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -59,14 +58,14 @@ function App() {
 
   function handleClearButtonClick(): void {
     setIsRunning(false);
-    setBoard(generateBoard(10));
+    setBoard(generateNewBoard());
     setGenCount(0);
   }
 
   return (
     <>
       <Header />
-      {genCount > 0 && <p>Gen count: {genCount}</p>}
+      <p>Gen count: {genCount}</p>
       <table className="table">
         {board.map((row, rowIndex) => (
           <tr key={rowIndex}>

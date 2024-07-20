@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { getNextGen } from "./utils";
+import { getNextGen } from "./board";
 
 describe("getNextGen", () => {
   test("should throw error when called with no cells", () => {
