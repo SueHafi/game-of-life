@@ -1,11 +1,10 @@
 body {
   font-family: sans-serif;
   text-align: center;
-  background-color:rgba(58, 163, 226, 0.1);
+  background-color: rgba(58, 163, 226, 0.1);
   margin: 0;
   padding: 0;
   height: 100vh;
-  
 }
 
 .root {
@@ -33,5 +32,19 @@ td {
 .button {
   background-color: transparent;
   border: none;
-  padding: 8px 10px;
+  padding: 15px;
+}
+
+.button--is-alive {
+  background-color: lightgreen;
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

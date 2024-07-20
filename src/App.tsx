@@ -73,10 +73,10 @@ function App() {
             {row.map((cell, cellIndex) => (
               <td key={cellIndex}>
                 <button
-                  className="button"
+                  className={`button ${cell ? "button--is-alive" : ""}`}
                   onClick={() => handleCellClick(rowIndex, cellIndex)}
                 >
-                  {cell ? "O" : "X"}
+                  <span className="sr-only">{cell ? "Alive" : "Dead"}</span>
                 </button>
               </td>
             ))}
