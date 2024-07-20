@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header.tsx";
 import "./App.css";
 import { getNextGen } from "./utils.ts";
@@ -19,6 +19,19 @@ function generateGrid(gridSize: number): boolean[][] {
 function App() {
   const [board, setBoard] = useState(generateGrid(10));
   const [genCount, setGenCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    let intervalId: number;
+    if (isRunning) {
+      intervalId = setInterval(progressToNextGen, 200);
+    }
+    return () => {
+      if (isRunning) {
+        clearInterval(intervalId);
+      }
+    };
+  });
 
   function handleCellClick(rowIndex: number, cellIndex: number): void {
     const copyBoard = structuredClone(board);
@@ -26,10 +39,21 @@ function App() {
     setBoard(copyBoard);
   }
 
-  function handleNextButtonClick(): void {
+  function progressToNextGen(): void {
     const newBoard = getNextGen(board);
     setBoard(newBoard);
     setGenCount(genCount + 1);
+  }
+
+  function handleNextButtonClick(): void {
+    progressToNextGen();
+  }
+
+  function handleStartButtonClick(): void {
+    setIsRunning(true);
+  }
+  function handlePauseButtonClick(): void {
+    setIsRunning(false);
   }
 
   return (
@@ -52,6 +76,11 @@ function App() {
           </tr>
         ))}
       </table>
+      {isRunning ? (
+        <button onClick={handlePauseButtonClick}>Pause</button>
+      ) : (
+        <button onClick={handleStartButtonClick}>Start</button>
+      )}
       <button onClick={handleNextButtonClick}>Next</button>
     </>
   );
