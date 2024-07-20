@@ -18,7 +18,7 @@ function generateGrid(gridSize: number): boolean[][] {
 
 function App() {
   const [board, setBoard] = useState(generateGrid(10));
-  console.log(board);
+  const [genCount, setGenCount] = useState(0);
 
   function handleCellClick(rowIndex: number, cellIndex: number): void {
     const copyBoard = structuredClone(board);
@@ -29,11 +29,13 @@ function App() {
   function handleNextButtonClick(): void {
     const newBoard = getNextGen(board);
     setBoard(newBoard);
+    setGenCount(genCount + 1);
   }
 
   return (
     <>
       <Header />
+      {genCount > 0 && <p>Gen count: {genCount}</p>}
       <table className="table">
         {board.map((row, rowIndex) => (
           <tr key={rowIndex}>
