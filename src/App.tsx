@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header.tsx";
 import "./App.css";
+import { getNextGen } from "./utils.ts";
 
 function generateGrid(gridSize: number): boolean[][] {
   const grid = [];
@@ -19,10 +20,15 @@ function App() {
   const [board, setBoard] = useState(generateGrid(10));
   console.log(board);
 
-  function handleCellClick(rowIndex: number, cellIndex: number) {
+  function handleCellClick(rowIndex: number, cellIndex: number): void {
     const copyBoard = structuredClone(board);
     copyBoard[rowIndex][cellIndex] = !board[rowIndex][cellIndex];
     setBoard(copyBoard);
+  }
+
+  function handleNextButtonClick(): void {
+    const newBoard = getNextGen(board);
+    setBoard(newBoard);
   }
 
   return (
@@ -44,7 +50,7 @@ function App() {
           </tr>
         ))}
       </table>
-      <button>Next</button>
+      <button onClick={handleNextButtonClick}>Next</button>
     </>
   );
 }
