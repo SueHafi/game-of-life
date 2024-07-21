@@ -64,22 +64,24 @@ function App() {
 
   return (
     <>
-      <Header genCount={genCount}/>
+      <Header genCount={genCount} />
       <table className="table">
-        {board.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>
-                <button
-                  className={`block ${cell ? "block--is-alive" : ""}`}
-                  onClick={() => handleCellClick(rowIndex, cellIndex)}
-                >
-                  <span className="sr-only">{cell ? "Alive" : "Dead"}</span>
-                </button>
-              </td>
-            ))}
-          </tr>
-        ))}
+        <tbody>
+          {board.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, cellIndex) => (
+                <td key={cellIndex}>
+                  <button
+                    className={`block ${cell ? "block--is-alive" : ""}`}
+                    onClick={() => handleCellClick(rowIndex, cellIndex)}
+                  >
+                    <span className="sr-only">{cell ? "Alive" : "Dead"}</span>
+                  </button>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       </table>
       <div className="buttons-container">
         {isRunning ? (
