@@ -64,15 +64,14 @@ function App() {
 
   return (
     <>
-      <Header />
-      <p>Gen count: {genCount}</p>
+      <Header genCount={genCount}/>
       <table className="table">
         {board.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((cell, cellIndex) => (
               <td key={cellIndex}>
                 <button
-                  className={`button ${cell ? "button--is-alive" : ""}`}
+                  className={`block ${cell ? "block--is-alive" : ""}`}
                   onClick={() => handleCellClick(rowIndex, cellIndex)}
                 >
                   <span className="sr-only">{cell ? "Alive" : "Dead"}</span>
@@ -82,13 +81,38 @@ function App() {
           </tr>
         ))}
       </table>
-      {isRunning ? (
-        <button onClick={handlePauseButtonClick}>Pause</button>
-      ) : (
-        <button onClick={handleStartButtonClick}>Start</button>
-      )}
-      <button onClick={handleNextButtonClick}>Next</button>
-      <button onClick={handleClearButtonClick}>Clear</button>
+      <div className="buttons-container">
+        {isRunning ? (
+          <button
+            className="button start-pause-button pause-button"
+            onClick={handlePauseButtonClick}
+          >
+            Pause
+          </button>
+        ) : (
+          <button
+            className="button start-pause-button"
+            onClick={handleStartButtonClick}
+          >
+            Start
+          </button>
+        )}
+        <button className="button next-button" onClick={handleNextButtonClick}>
+          Next
+        </button>
+        <button
+          className="button clear-button"
+          onClick={handleClearButtonClick}
+        >
+          Clear
+        </button>
+      </div>
+      <footer className="footer">
+        &copy; by Sue Hafizoglu | See code at{" "}
+        <a href="https://github.com/SueHafi/game-of-life" target="_blank">
+          GitHub
+        </a>
+      </footer>
     </>
   );
 }

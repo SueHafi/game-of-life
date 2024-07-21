@@ -12,3 +12,8 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+
+.gen-count-text {
+  margin-top: 0;
+}
