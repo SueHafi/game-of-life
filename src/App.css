@@ -27,13 +27,15 @@ body {
 th,
 td {
   border: 1px solid rgb(160 160 160);
+  line-height: 0;
   padding: 0;
+  margin: 0;
 }
 
 .block {
   background-color: transparent;
   border: none;
-  padding: 15px;
+  padding: 8px;
 }
 
 .block--is-alive {
@@ -69,11 +71,11 @@ td {
   padding-right: 4.5px;
 }
 .start-pause-button {
-  background-color: #13C4BE;
+  background-color: #13c4be;
 }
 
 .start-pause-button:hover {
-  background-color: rgba(19, 196, 190,0.5);
+  background-color: rgba(19, 196, 190, 0.5);
 }
 
 .start-pause-button:active {
@@ -89,7 +91,7 @@ td {
 }
 
 .next-button:active {
-  background-color: rgb(59, 83, 155)
+  background-color: rgb(59, 83, 155);
 }
 
 .clear-button {
@@ -100,7 +102,6 @@ td {
 .clear-button:hover {
   background-color: rgba(104, 41, 189, 0.5);
 }
-
 
 .clear-button:active {
   background-color: rgb(70, 27, 125);
@@ -121,4 +122,15 @@ td {
 .footer {
   margin-top: 20px;
   padding-bottom: 20px;
+}
+
+@media (min-width: 900px) {
+  .block {
+    padding: 15px;
+  }
+
+  th,
+  td {
+    line-height: normal;
+  }
 }
