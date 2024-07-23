@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header.tsx";
 import "./App.css";
-import {
-  Board,
-  applyKickbackPattern,
-  getNextGen,
-  generateBoard,
-} from "./board.ts";
+import { applyKickbackPattern, getNextGen, generateBoard } from "./board.ts";
 import { boardSize } from "./config.ts";
 
-function generateNewBoard(): Board {
-  const board = generateBoard(boardSize);
-  const boardWithPattern = applyKickbackPattern(board);
-  return boardWithPattern;
-}
-
 function App() {
-  const [board, setBoard] = useState(generateNewBoard());
+  const [board, setBoard] = useState(
+    applyKickbackPattern(generateBoard(boardSize))
+  );
   const [genCount, setGenCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -58,7 +49,13 @@ function App() {
 
   function handleClearButtonClick(): void {
     setIsRunning(false);
-    setBoard(generateNewBoard());
+    setBoard(generateBoard(boardSize));
+    setGenCount(0);
+  }
+
+  function handleRestartButtonClick(): void {
+    setIsRunning(false);
+    setBoard(applyKickbackPattern(generateBoard(boardSize)));
     setGenCount(0);
   }
 
@@ -107,6 +104,12 @@ function App() {
           onClick={handleClearButtonClick}
         >
           Clear
+        </button>
+        <button
+          className="button restart-button"
+          onClick={handleRestartButtonClick}
+        >
+          Restart
         </button>
       </div>
       <footer className="footer">

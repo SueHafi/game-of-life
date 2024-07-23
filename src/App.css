@@ -106,6 +106,18 @@ td {
   background-color: rgb(70, 27, 125);
 }
 
+.restart-button {
+  background-color: rgb(125, 24, 207);
+}
+
+.restart-button:hover {
+  background-color: rgba(125, 24, 207, 0.5);
+}
+
+.restart-button:active {
+  background-color: rgb(71, 17, 114);
+}
+
 .footer {
   margin-top: 20px;
   padding-bottom: 20px;
